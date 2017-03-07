@@ -8,7 +8,8 @@ import java.util.List;
  * Created by FRAMGIA\duong.van.tien on 06/03/2017.
  *
  */
-public interface IUserService extends Serializable{
+public interface IUserService extends IBaseService{
 
     public List<UserBean> findAll();
+    public void addUser(UserBean userBean);
 }

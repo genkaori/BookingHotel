@@ -12,7 +12,7 @@ public class Baseservice {
     protected IUserDAO userDAO;
 
     public IUserDAO getUserDAO() {
-        return null;
+        return this.userDAO;
     }
 
     public void setUserDAO(IUserDAO userDAO) {
