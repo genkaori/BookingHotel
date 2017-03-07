@@ -33,4 +33,23 @@ public class UserService extends Baseservice implements IUserService {
         }
         return null;
     }
+
+	@Override
+	public void createUser(UserBean userBean) {
+		try {
+			User user = new User();
+			user.setId(userBean.getId());
+			user.setUsername(userBean.getUsername());
+			user.setPassword(userBean.getPassword());
+			user.setFullname(userBean.getFullname());
+			user.setEmail(userBean.getEmail());
+			user.setPhone(userBean.getPhone());
+			user.setRole(userBean.getRole());
+
+			User result = userDAO.save(user);
+			logger.info("save user success..........");
+		} catch (Exception e) {
+			logger.error("exception save user: " + e);
+		}	
+	}
 }
