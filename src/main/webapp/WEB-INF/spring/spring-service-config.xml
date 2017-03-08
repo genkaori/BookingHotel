@@ -6,7 +6,7 @@
 
 	<bean id="UserService" parent="transactionProxyTemplate">
 		<property name="target">
-			<bean class="vn.framgia.service.UserService">
+			<bean class="vn.framgia.service.UserServiceImpl">
 				<property name="userDAO" ref="UserDAO"></property>
 			</bean>
 		</property>

@@ -33,17 +33,15 @@ public class UserController {
     private IUserService userService;
 
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
         logger.info("Welcome index page! The client locale");
         HashMap<String, Object> model = new HashMap<String, Object>();
-        model.put("attributes", "Xin chao cac ban!");
 
         List<UserBean> userInfoList = userService.findAll();
-        System.out.println("--X--"+userInfoList);
         if (!Helpers.isEmpty(userInfoList)) {
             for (UserBean userInfo : userInfoList) {
-                System.out.println("id---------------:"+userInfo.getEmail());
+                logger.info("email----:"+userInfo.getEmail());
             }
         }
 
