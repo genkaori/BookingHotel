@@ -1,5 +1,6 @@
 package vn.framgia.service;
 
+import vn.framgia.dao.IBookingDAO;
 import vn.framgia.dao.IUserDAO;
 
 /**
@@ -9,6 +10,7 @@ import vn.framgia.dao.IUserDAO;
 public class Baseservice {
 
     protected IUserDAO userDAO;
+    protected IBookingDAO bookingDAO;
 
     public IUserDAO getUserDAO() {
         return userDAO;
@@ -17,4 +19,13 @@ public class Baseservice {
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
     }
+
+	public IBookingDAO getBookingDAO() {
+		return bookingDAO;
+	}
+
+	public void setBookingDAO(IBookingDAO bookingDAO) {
+		this.bookingDAO = bookingDAO;
+	}
+
 }

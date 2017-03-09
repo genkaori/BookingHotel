@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--sidebar start-->
 <aside>
     <div id="sidebar"  class="nav-collapse ">
@@ -11,8 +12,11 @@
                     <span>EXTRA PAGES</span>
                 </a>
                 <ul class="sub">
-                    <li><a style="font-size: medium;" href="#">HOME</a></li>
-                    <li><a style="font-size: medium;" href="#">DAT PHONG</a></li>
+                    <li><a style="font-size: medium;" href="index">HOME</a></li>
+                <c:if test="${!empty pageContext.request.userPrincipal.name}">
+                    <li><a style="font-size: medium;" href="#">BOOKING</a></li>
+                    <li><a style="font-size: medium;" href="showbooking">SHOWBOOKING</a></li>
+                </c:if>
                 </ul>
             </li>
         </ul>

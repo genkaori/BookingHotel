@@ -11,4 +11,13 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="BookingService" parent="transactionProxyTemplate">
+		<property name="target">
+			<bean class="vn.framgia.service.BookingServiceImpl">
+				<property name="bookingDAO" ref="BookingDAO"/>
+			</bean>
+		</property>
+	</bean>
+	
 </beans>
