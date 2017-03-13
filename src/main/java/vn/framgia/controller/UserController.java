@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.framgia.bean.UserBean;
 import vn.framgia.service.IUserService;
 import vn.framgia.util.Helpers;
+import vn.framgia.util.InputCondition;
 
 /**
  * Created by FRAMGIA\duong.van.tien on 06/03/2017.
@@ -28,7 +29,7 @@ import vn.framgia.util.Helpers;
 @Controller
 public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private IUserService userService;
@@ -72,6 +73,57 @@ public class UserController {
 			return model;
 		}
 		return new ModelAndView("redirect:listUser");
+	}
 
+	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
+	public String createUser(Model model, @ModelAttribute(value = "userForm") UserBean userForm) {
+		UserBean user = new UserBean();
+		model.addAttribute("userForm", user);
+		return "newUser";
+	}
+	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
+	public ModelAndView createUser(Model model, @ModelAttribute(value = "userForm") UserBean userForm,
+			BindingResult result, HttpServletRequest request) {
+		boolean check = true;
+		String phone = userForm.getPhone();
+		String email = userForm.getEmail();
+		String role = request.getParameter("role");
+		if (Helpers.isEmpty(userForm.getFullname())) {
+			result.reject("fullname", "Please enter Full Name!");
+			check = false;
+		}
+		if (Helpers.isEmpty(userForm.getUsername())) {
+			result.reject("username", "Please enter Username!");
+			check = false;
+		}
+		if (Helpers.isEmpty(userForm.getPassword())) {
+			result.reject("password", "Please enter Password!");
+			check = false;
+		}
+		if (Helpers.isEmpty(email)) {
+			result.reject("email", "Please enter your Email!");
+			check = false;
+		} else {
+			if (!InputCondition.isEmailValid(email)) {
+				result.reject("email", "Format email invalid!");
+				check = false;
+			}
+		}
+		if (Helpers.isEmpty(phone)) {
+			result.reject("phone", "Please enter your phone!");
+			check = false;
+		} else {
+			if (!InputCondition.isPhoneNumberValid(phone)) {
+				result.reject("phone", "Phone number input invalid!");
+				check = false;
+			}
+		}
+		if (!check) {
+			return new ModelAndView("newUser");
+		}
+		userForm.setRole(role);
+		userService.createUser(userForm);
+		logger.info("add userr success............");
+		return new ModelAndView("redirect:index");
 	}
 }

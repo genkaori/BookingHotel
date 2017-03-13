@@ -8,7 +8,7 @@ import vn.framgia.model.User;
  * Created by FRAMGIA\duong.van.tien on 06/03/2017.
  *
  */
-public interface IUserDAO extends IGenericDAO<User, Integer>{
-	public List getListUser();
-	public int deleteUser(int id);
+public interface IUserDAO extends IGenericDAO<User, Integer> {
+	
 }
+
