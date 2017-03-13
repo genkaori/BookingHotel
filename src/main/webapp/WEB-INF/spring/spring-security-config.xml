@@ -23,7 +23,7 @@
 		<logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />
 		<csrf />
 
-		<remember-me token-validity-seconds="1209600" remember-me-parameter="remember-me" />
+		<remember-me token-validity-seconds="1234569879" remember-me-parameter="remember-me" />
 
 	</http>
 

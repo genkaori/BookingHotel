@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 public class UserBean implements Serializable {
-    private long id;
+    private Integer id;
     private String username;
     private String password;
     private String fullname;
@@ -16,11 +16,11 @@ public class UserBean implements Serializable {
     private String phone;
     private String role;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

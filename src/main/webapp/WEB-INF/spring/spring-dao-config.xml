@@ -9,10 +9,23 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+
 	<bean id="BookingDAO" class="vn.framgia.dao.BookingDAOImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="RoomDAO" class="vn.framgia.dao.impl.RoomDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+
+	<bean id="HotelDAO" class="vn.framgia.dao.impl.HotelDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
 </beans>

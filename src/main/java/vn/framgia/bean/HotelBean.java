@@ -1,29 +1,29 @@
-package vn.framgia.model;
+package vn.framgia.bean;
+
+import vn.framgia.model.Room;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by tienduongvan on 27/02/2017.
- *
+ * Created by FRAMGIA\duong.van.tien on 13/03/2017.
  */
-public class Hotel implements Serializable {
-
+public class HotelBean implements Serializable {
     private Integer id;
     private String name;
     private String address;
     private Integer starLevel;
     private String description;
-    List<Room> rooms = new ArrayList<Room>();;
+    List<Room> rooms = new ArrayList<Room>();
 
-    public Hotel(){}
+    public HotelBean(){};
 
-    public Hotel(Integer id) {
+    public HotelBean(Integer id) {
         this.id = id;
     }
 
-    public Hotel(Integer id, String name, String address, Integer starLevel, String description, List<Room> rooms) {
+    public HotelBean(Integer id, String name, String address, Integer starLevel, String description, List<Room> rooms) {
         this.id = id;
         this.name = name;
         this.address = address;
