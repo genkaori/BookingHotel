@@ -12,4 +12,6 @@ public interface IUserService extends Serializable{
 
     public List<UserBean> findAll();
     public boolean deleteUser(int id);
+    public UserBean getUserById(int id);
+    public boolean updateUser(UserBean userBean);
 }

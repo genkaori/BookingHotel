@@ -16,11 +16,20 @@
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
 	</definition>
-	
+	<!-- add user -->
+	<definition name="newUser" extends="base.definition">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/views/newUser.jsp" />
+	</definition>
 	<!-- show user -->
 	<definition name="listUser" extends="base.definition">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/views/listUser.jsp" />
+	</definition>
+	<!-- edit user -->
+	<definition name="editUser" extends="base.definition">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/views/editUser.jsp" />
 	</definition>
 
 </tiles-definitions>
