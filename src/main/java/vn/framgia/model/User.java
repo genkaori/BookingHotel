@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 public class User implements Serializable{
-    private int id;
+    private long id;
     private String username;
     private String password;
     private String fullname;
@@ -20,7 +20,7 @@ public class User implements Serializable{
 
     }
 
-    public User(int id, String username, String password, String fullname,
+    public User(long id, String username, String password, String fullname,
                 String email, String phone, String role) {
         super();
         this.id = id;
@@ -32,11 +32,11 @@ public class User implements Serializable{
         this.role = role;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

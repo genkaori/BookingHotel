@@ -57,6 +57,22 @@ public class UserServiceImpl extends Baseservice implements IUserService {
 			logger.error("exception save user: " + e);
 		}	
 	}
+
+	@Override
+	public boolean deleteUser(long id) {
+		try {
+			User user = userDAO.findById(id);
+			if (user != null) {
+				userDAO.delete(user);
+				return true;
+			} else
+				return false;
+
+		} catch (Exception e) {
+			logger.debug("delete user excepton: " + e);
+		}
+		return false;
+	}	
 	
 	@Override
 	public CustomUserDetail getUserByAcount(String username) {
