@@ -25,4 +25,10 @@
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/views/newUser.jsp" />
 	</definition>
+	
+	<definition name="showbooking" extends="base.definition">
+		<put-attribute name="title" value="Show Booking" />
+		<put-attribute name="body" value="/WEB-INF/views/user_showbooking.jsp" />
+	</definition>
+	
 </tiles-definitions>
