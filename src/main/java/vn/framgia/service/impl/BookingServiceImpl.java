@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import vn.framgia.bean.ShowBookingBean;
+import vn.framgia.model.Bill;
 import vn.framgia.model.Booking;
+import vn.framgia.model.UsedItem;
 import vn.framgia.service.IBookingService;
 import vn.framgia.util.Helpers;
 
@@ -28,12 +30,13 @@ public class BookingServiceImpl extends BaseserviceImpl implements IBookingServi
 						listObj = new ArrayList<ShowBookingBean>();
 					}
 					bookingBean = new ShowBookingBean();
+					bookingBean.setBookingId(book.getId());
 					bookingBean.setNameClient(book.getClientId().getFullName());
 					bookingBean.setNameRoom(book.getRoomId().getName());
 					bookingBean.setCheckIn(Helpers.convertDatetoString(book.getCheckIn()));
 					bookingBean.setCheckOut(Helpers.convertDatetoString(book.getCheckOut()));
-					bookingBean.setPriceRoom(book.getTotalPrice());
-					bookingBean.setStatus(false);//TODO
+					bookingBean.setPriceRoom((int)(book.getTotalPrice() + getTotalPriceService(book.getId())));
+					bookingBean.setStatus(checkStatusBooking(book));
 					
 					listObj.add(bookingBean);
 					buffer = book.getClientId().getId();
@@ -71,5 +74,43 @@ public class BookingServiceImpl extends BaseserviceImpl implements IBookingServi
 			logger.error(e);
 		}
 		return null;
+	}
+	
+	public String checkStatusBooking(Booking booking){
+		try{
+			List<Bill> lstBill = billDAO.findBillByBooKing(String.valueOf(booking.getId()));
+			if(!Helpers.isEmpty(lstBill)){
+				float payment = 0f;
+				for (Bill bill : lstBill) {
+					payment += bill.getPaymentAmount();
+				}
+				float totalServiceFollow = getTotalPriceService(booking.getId()); 
+				if((booking.getTotalPrice() + totalServiceFollow) <= payment){
+					return ShowBookingBean.STATUS_OK;
+				}
+				if(payment < (booking.getTotalPrice() + totalServiceFollow) && payment != 0f){
+					return ShowBookingBean.STATUS_NOT;
+				}
+			}
+		}catch(Exception e){
+			logger.error(e);
+		}
+		return ShowBookingBean.STATUS_NO;
+	}
+	
+	public int getTotalPriceService(int bookingId){
+		try{
+			List<UsedItem> lstUserService = userServiceDAO.findServiceByBookingId(bookingId);
+			if(!Helpers.isEmpty(lstUserService)){
+				int totalPrice = 0;
+				for(UsedItem userService : lstUserService){
+					totalPrice += userService.getItem().getPrice();
+				}
+				return totalPrice;
+			}
+		}catch(Exception e){
+			logger.error(e);
+		}
+		return 0;
 	}
 }

@@ -38,7 +38,7 @@
 							<th>Room</th>
 							<th>Date In</th>
 							<th>Date Out</th>
-							<th>Price</th>
+							<th>Total Price</th>
 							<th>Status</th>
 						</tr>
 					</thead>
@@ -49,12 +49,15 @@
 							<td><c:out value="${book.checkIn}"></c:out></td>
 							<td><c:out value="${book.checkOut}"></c:out></td>
 							<td><c:out value="${book.priceRoom}"></c:out></td>
-							<c:if test="${book.status == false}">
+							<c:if test="${book.status == 'NO'}">
 								<td><span class="badge bg-important">No</span></td>
 							</c:if>
-							<c:if test="${book.status == true}">
-								<td><button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button></td>
+							<c:if test="${book.status == 'OK'}">
+								<td><span class="badge bg-success"><i class=" fa fa-check"></i></span></td>	
 							</c:if>
+							<c:if test="${book.status == 'NOT'}">
+								<td><span class="badge bg-warning">No</span></td>
+							</c:if>	
 							<td>
 								<a class="badge bg-success" href="#">PAY</a>
 								<a class="badge bg-success" href="#">DETAIL</a>

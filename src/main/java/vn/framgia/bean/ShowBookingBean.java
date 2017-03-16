@@ -1,7 +1,11 @@
 package vn.framgia.bean;
 
-
 public class ShowBookingBean {
+	public static final String STATUS_NO = "NO";
+	public static final String STATUS_NOT = "NOT";
+	public static final String STATUS_OK = "OK";
+
+	private Integer bookingId;
 	private String nameClient;
 	private String nameRoom;
 	private String checkIn;
@@ -10,9 +14,17 @@ public class ShowBookingBean {
 	private String paymentAmount;
 	private String paymentByUser;
 	private String textNote;
-	private int isCheckin;
-	private boolean status;
-	private float priceRoom;
+	private Integer isCheckin;
+	private String status;
+	private Integer priceRoom;
+
+	public Integer getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
+	}
 
 	public String getNameClient() {
 		return nameClient;
@@ -78,28 +90,28 @@ public class ShowBookingBean {
 		this.textNote = textNote;
 	}
 
-	public int getIsCheckin() {
+	public Integer getIsCheckin() {
 		return isCheckin;
 	}
 
-	public void setIsCheckin(int isCheckin) {
+	public void setIsCheckin(Integer isCheckin) {
 		this.isCheckin = isCheckin;
 	}
 
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public float getPriceRoom() {
+	public Integer getPriceRoom() {
 		return priceRoom;
 	}
 
-	public void setPriceRoom(float priceRoom) {
+	public void setPriceRoom(Integer priceRoom) {
 		this.priceRoom = priceRoom;
 	}
-	
+
 }

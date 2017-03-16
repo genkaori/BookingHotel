@@ -2,7 +2,6 @@ package vn.framgia.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 public class Booking implements Serializable {
 	private Integer id;
@@ -10,8 +9,8 @@ public class Booking implements Serializable {
 	private Date checkOut;
 	private Float totalPrice;
 	private String note;
-	private Client clientId;
-	private Room roomId;
+	private Client client;
+	private Room room;
 	private Integer isCheckIn;
 
 	public Booking() {
@@ -19,15 +18,15 @@ public class Booking implements Serializable {
 	}
 
 	public Booking(Integer id, Date checkIn, Date checkOut, Float totalPrice,
-			String note, Client clientId, Room roomId, Integer isCheckIn) {
+			String note, Client client, Room room, Integer isCheckIn) {
 		super();
 		this.id = id;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.totalPrice = totalPrice;
 		this.note = note;
-		this.clientId = clientId;
-		this.roomId = roomId;
+		this.client = client;
+		this.room = room;
 		this.isCheckIn = isCheckIn;
 	}
 
@@ -72,19 +71,19 @@ public class Booking implements Serializable {
 	}
 
 	public Client getClientId() {
-		return clientId;
+		return client;
 	}
 
 	public void setClientId(Client clientId) {
-		this.clientId = clientId;
+		this.client = clientId;
 	}
 
 	public Room getRoomId() {
-		return roomId;
+		return room;
 	}
 
 	public void setRoomId(Room roomId) {
-		this.roomId = roomId;
+		this.room = roomId;
 	}
 
 	public Integer getIsCheckIn() {
