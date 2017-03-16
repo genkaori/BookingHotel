@@ -27,7 +27,7 @@
 </div>
 <div class="top-menu">
 	<ul class="nav pull-right top-menu">
-        <li><a class="logout" href="javascript:formSubmit()">Logout</a></li>
+        <li><a class="logout" id="btnLogin" href="#">Logout</a></li>
         <form id="logoutForm" action="<c:url value="/j_spring_security_logout"/>" method="post" >
 			<input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden"/>
 		</form>
@@ -41,7 +41,7 @@
 </header>
 <!--header end-->
 <script>
-	function formSubmit(){
-		document.getElementById("logoutForm").submit();
-	}
+	$("#btnLogin").on("click",function(){
+		$("#logoutForm").submit();
+	});
 </script>
