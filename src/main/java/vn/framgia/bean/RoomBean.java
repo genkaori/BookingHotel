@@ -1,14 +1,13 @@
-package vn.framgia.model;
-
+package vn.framgia.bean;
+import vn.framgia.model.Hotel;
 import java.io.Serializable;
 
 /**
- * Created by tienduongvan on 27/02/2017.
- *
+ * Created by FRAMGIA\duong.van.tien on 06/03/2017.
+ * 
  */
-public class Room implements Serializable {
-
-    private Integer id;
+public class RoomBean implements Serializable{
+    private int id;
     private String name; // unique
     private Float price;
     private Integer size;
@@ -16,23 +15,13 @@ public class Room implements Serializable {
     private Integer hotelId;
     private Hotel hotel;
 
+    public RoomBean() {}
 
-    public Room() {}
-
-    public Room(Integer id, String name, Float price, Integer size, String description, Hotel hotel) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.size = size;
-        this.description = description;
-        this.hotel = hotel;
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,16 +37,16 @@ public class Room implements Serializable {
         return price;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
     public Integer getSize() {
         return size;
     }
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public String getDescription() {
