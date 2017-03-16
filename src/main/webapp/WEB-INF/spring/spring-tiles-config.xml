@@ -33,11 +33,29 @@
         <put-attribute name="body" value="/WEB-INF/views/room/new.jsp"/>
     </definition>
 
-    <!-- edit room -->
-    <definition name="editRoom" extends="base.definition">
-        <put-attribute name="title" value="Home"/>
-        <put-attribute name="body" value="/WEB-INF/views/room/edit.jsp"/>
-    </definition>
+	<!-- edit room -->
+	<definition name="editRoom" extends="base.definition">
+		<put-attribute name="title" value="Home"/>
+		<put-attribute name="body" value="/WEB-INF/views/room/edit.jsp"/>
+	</definition>
+
+	<!-- show order -->
+	<definition name="items" extends="base.definition">
+		<put-attribute name="title" value="Home"/>
+		<put-attribute name="body" value="/WEB-INF/views/item/items.jsp"/>
+	</definition>
+
+	<!-- add order -->
+	<definition name="newItem" extends="base.definition">
+		<put-attribute name="title"	value="Home"/>
+		<put-attribute name="body" value="/WEB-INF/views/item/new.jsp"/>
+	</definition>
+
+	<!-- edit order -->
+	<definition name="editItem" extends="base.definition">
+		<put-attribute name="title" value="Home"/>
+		<put-attribute name="body" value="/WEB-INF/views/item/edit.jsp"/>
+	</definition>
 
 	<definition name="newUser" extends="base.definition">
 		<put-attribute name="title" value="Home" />

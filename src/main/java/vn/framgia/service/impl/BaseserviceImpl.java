@@ -4,6 +4,7 @@ import vn.framgia.dao.IBookingDAO;
 import vn.framgia.dao.IHotelDAO;
 import vn.framgia.dao.IRoomDAO;
 import vn.framgia.dao.IUserDAO;
+import vn.framgia.dao.IItemDAO;
 
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ public class BaseserviceImpl implements Serializable {
     protected IRoomDAO roomDAO;
     protected IHotelDAO hotelDAO;
     protected IBookingDAO bookingDAO;
+    protected IItemDAO itemDAO;
 
     public IUserDAO getUserDAO() {
         return userDAO;
@@ -49,5 +51,12 @@ public class BaseserviceImpl implements Serializable {
 	public void setBookingDAO(IBookingDAO bookingDAO) {
 		this.bookingDAO = bookingDAO;
 	}
-    
+
+    public IItemDAO getItemDAO() {
+        return itemDAO;
+    }
+
+    public void setItemDAO(IItemDAO itemDAO) {
+        this.itemDAO = itemDAO;
+    }
 }
