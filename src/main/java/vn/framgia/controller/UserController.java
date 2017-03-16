@@ -114,7 +114,7 @@ public class UserController {
 	}
     
 	@RequestMapping("/deleteUser")
-	public ModelAndView deleteUser(@RequestParam long id) {
+	public ModelAndView deleteUser(@RequestParam int id) {
 		boolean check = true;
 		check = userService.deleteUser(id);
 		ModelAndView model = new ModelAndView();
