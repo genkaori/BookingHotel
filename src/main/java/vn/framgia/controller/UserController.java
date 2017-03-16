@@ -99,7 +99,7 @@ public class UserController {
 		userForm.setRole(role);
 		userService.createUser(userForm);
 		logger.info("add userr success............");
-		return new ModelAndView("redirect:index");
+		return new ModelAndView("redirect:listUser");
 	}
 	
 	@RequestMapping(value = "/listUser", method = RequestMethod.GET)
@@ -126,4 +126,30 @@ public class UserController {
 		return new ModelAndView("redirect:listUser");
 
 	}
+	@RequestMapping("/editUser")
+    public ModelAndView editUser(@RequestParam int id){
+    	UserBean userBean = userService.getUserById(id);
+    	ModelAndView model = new ModelAndView();
+    	if(userBean == null){
+    		model.addObject("errEditUser", "edit user has error");
+    		model.setViewName("editUser");
+    		return model;
+    	}
+    	return new ModelAndView("editUser","userForm", userBean);
+    }
+	
+	@RequestMapping("/updateUser")
+    public ModelAndView updateUser(@ModelAttribute(value = "userForm") UserBean userBean, HttpServletRequest request){
+    	boolean check = true;
+    	String role = request.getParameter("role");
+    	userBean.setRole(role);
+    	check = userService.updateUser(userBean);
+    	ModelAndView model = new ModelAndView();
+    	if(!check){
+    		model.setViewName("editUser");
+    		model.addObject("errUpdateUser", "Update user has error");
+    		return model;
+    	}
+    	return new ModelAndView("redirect:listUser");
+    }
 }

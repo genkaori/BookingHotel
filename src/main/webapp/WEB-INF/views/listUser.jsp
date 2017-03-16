@@ -48,7 +48,7 @@
 									<td><c:out value="${user.role}" /></td>
 									<td>
 										<button class="btn btn-theme">
-											<a href="#">Edit</a>
+											<a href="editUser?id=${user.id}">Edit</a>
 										</button>
 										<button class="btn btn-theme">
 											<a href="deleteUser?id=${user.id}">Delete</a>

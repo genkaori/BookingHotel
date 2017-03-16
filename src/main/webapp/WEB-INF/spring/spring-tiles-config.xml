@@ -35,4 +35,9 @@
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/views/listUser.jsp" />
 	</definition>
+	<definition name="editUser" extends="base.definition">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/views/editUser.jsp" />
+	</definition>
+	
 </tiles-definitions>
