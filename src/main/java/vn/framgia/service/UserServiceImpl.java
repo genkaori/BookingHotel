@@ -59,7 +59,7 @@ public class UserServiceImpl extends Baseservice implements IUserService {
 	}
 
 	@Override
-	public boolean deleteUser(long id) {
+	public boolean deleteUser(int id) {
 		try {
 			User user = userDAO.findById(id);
 			if (user != null) {
@@ -95,7 +95,7 @@ public class UserServiceImpl extends Baseservice implements IUserService {
 	}
 
 	@Override
-	public UserBean getUserById(long id) {
+	public UserBean getUserById(int id) {
 		try {
 			User user = userDAO.findById(id);
 			if (user != null) {
