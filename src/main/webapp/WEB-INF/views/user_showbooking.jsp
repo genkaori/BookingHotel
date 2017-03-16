@@ -2,30 +2,27 @@
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="col-lg-9 main-chart">
-    <div>
-        <div class="bootstrap-iso">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <form class="form-horizontal" method="post">
-                            <div class="form-group " style="text-align: center;">
-                                <div class="col-sm-8">
-                                    <div style="margin-top: 5px; ">
-                                        <input type="text" class="form-control" id="contact_name" name="name">
-                                    </div>
+<div class="bootstrap-iso">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <form:form id="formSearch" action="searchbill" class="form-horizontal" method="post">
+                        <div class="form-group " style="text-align: center;">
+                            <div class="col-sm-8">
+                                <div style="margin-top: 5px; ">
+                                    <input type="text" class="form-control" id="contact_name" name="search">
                                 </div>
-                                <label class="control-label col-sm-4 requiredField" for="date">
-                                    <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Search Task</a>
-                                </label>
                             </div>
-                    </form>
-                </div>
+                            <label class="control-label col-sm-4 requiredField" for="date">
+                                <a id="search" class="btn btn-success btn-sm pull-left" href="javascript:submitSearch()">Search Task</a>
+                            </label>
+                        </div>
+                </form:form>
             </div>
         </div>
     </div>
-
 </div>
 
 <c:if test="${!empty listbooks}">
@@ -146,3 +143,8 @@
     <div id="calendar" class="mb">
     </div>
 </div>
+<script type="text/javascript">
+	function submitSearch() {
+		document.getElementById("formSearch").submit();
+	}
+</script>

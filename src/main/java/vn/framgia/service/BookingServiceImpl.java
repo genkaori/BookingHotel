@@ -12,10 +12,9 @@ import vn.framgia.util.Helpers;
 public class BookingServiceImpl extends Baseservice implements IBookingService {
 	private static final Logger logger = Logger.getLogger(Booking.class);
 
-	public List<List<ShowBookingBean>> showBooking(List<Booking> lstBoonkings) {
+	public List<List<ShowBookingBean>> showBooking(List<Booking> listBooking) {
 		try {
 			List<List<ShowBookingBean>> results = new ArrayList<List<ShowBookingBean>>();
-			List<Booking> listBooking = bookingDAO.findAllOrderClientId();
 			if (!Helpers.isEmpty(listBooking)) {
 				List<ShowBookingBean> listObj = null;
 				ShowBookingBean bookingBean = null;
@@ -60,4 +59,16 @@ public class BookingServiceImpl extends Baseservice implements IBookingService {
 		return null;
 	}
 	
+	@Override
+	public List<List<ShowBookingBean>> searchBookingByNameClient(String nameClient) {
+		try {
+			List<Booking> listBooking = bookingDAO.findBillByNameClient(nameClient);
+			if (!Helpers.isEmpty(listBooking)) {
+				return showBooking(listBooking);
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return null;
+	}
 }
