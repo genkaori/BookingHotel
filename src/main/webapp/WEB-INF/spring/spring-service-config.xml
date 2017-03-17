@@ -6,7 +6,7 @@
 
 	<bean id="UserService" parent="transactionProxyTemplate">
 		<property name="target">
-			<bean class="vn.framgia.service.UserServiceImpl">
+			<bean class="vn.framgia.service.impl.UserServiceImpl">
 				<property name="userDAO" ref="UserDAO"></property>
 			</bean>
 		</property>
@@ -14,7 +14,7 @@
 
 	<bean id="BookingService" parent="transactionProxyTemplate">
 		<property name="target">
-			<bean class="vn.framgia.service.BookingServiceImpl">
+			<bean class="vn.framgia.service.impl.BookingServiceImpl">
 				<property name="bookingDAO" ref="BookingDAO"/>
 			</bean>
 		</property>

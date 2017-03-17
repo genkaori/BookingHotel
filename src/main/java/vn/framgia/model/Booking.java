@@ -5,21 +5,21 @@ import java.util.Date;
 import java.util.Set;
 
 public class Booking implements Serializable {
-	private int id;
+	private Integer id;
 	private Date checkIn;
 	private Date checkOut;
-	private float totalPrice;
+	private Float totalPrice;
 	private String note;
 	private Client clientId;
 	private Room roomId;
-	private int isCheckIn;
+	private Integer isCheckIn;
 
 	public Booking() {
 		super();
 	}
 
-	public Booking(int id, Date checkIn, Date checkOut, float totalPrice,
-			String note, Client clientId, Room roomId, int isCheckIn) {
+	public Booking(Integer id, Date checkIn, Date checkOut, Float totalPrice,
+			String note, Client clientId, Room roomId, Integer isCheckIn) {
 		super();
 		this.id = id;
 		this.checkIn = checkIn;
@@ -31,11 +31,11 @@ public class Booking implements Serializable {
 		this.isCheckIn = isCheckIn;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -55,11 +55,11 @@ public class Booking implements Serializable {
 		this.checkOut = checkOut;
 	}
 
-	public float getTotalPrice() {
+	public Float getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(float totalPrice) {
+	public void setTotalPrice(Float totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -87,11 +87,11 @@ public class Booking implements Serializable {
 		this.roomId = roomId;
 	}
 
-	public int getIsCheckIn() {
+	public Integer getIsCheckIn() {
 		return isCheckIn;
 	}
 
-	public void setIsCheckIn(int isCheckIn) {
+	public void setIsCheckIn(Integer isCheckIn) {
 		this.isCheckIn = isCheckIn;
 	}
 

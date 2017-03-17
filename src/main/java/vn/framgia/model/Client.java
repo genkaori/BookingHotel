@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Client implements Serializable {
-	private int id;
+	private Integer id;
 	private String fullName;
 	private String cardNumber;
 	private Date birthDay;
@@ -15,7 +15,7 @@ public class Client implements Serializable {
 		super();
 	}
 
-	public Client(int id, String fullName, String cardNumber, Date birthDay,
+	public Client(Integer id, String fullName, String cardNumber, Date birthDay,
 			String address, String phone) {
 		super();
 		this.id = id;
@@ -26,11 +26,11 @@ public class Client implements Serializable {
 		this.phone = phone;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

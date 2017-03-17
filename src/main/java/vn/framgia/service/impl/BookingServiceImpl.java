@@ -1,4 +1,4 @@
-package vn.framgia.service;
+package vn.framgia.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,10 @@ import org.apache.log4j.Logger;
 
 import vn.framgia.bean.ShowBookingBean;
 import vn.framgia.model.Booking;
+import vn.framgia.service.IBookingService;
 import vn.framgia.util.Helpers;
 
-public class BookingServiceImpl extends Baseservice implements IBookingService {
+public class BookingServiceImpl extends BaseserviceImpl implements IBookingService {
 	private static final Logger logger = Logger.getLogger(Booking.class);
 
 	public List<List<ShowBookingBean>> showBooking(List<Booking> listBooking) {

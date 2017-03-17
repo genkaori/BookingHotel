@@ -1,4 +1,4 @@
-package vn.framgia.dao;
+package vn.framgia.dao.impl;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import vn.framgia.dao.GenericDAO;
+import vn.framgia.dao.IBookingDAO;
 import vn.framgia.model.Booking;
 
 public class BookingDAOImpl extends GenericDAO<Booking, Long> implements IBookingDAO{
