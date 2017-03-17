@@ -12,6 +12,15 @@
 		</property>
 	</bean>
 
+	<bean id="RoomService" parent="transactionProxyTemplate">
+		<property name="target">
+			<bean class="vn.framgia.service.impl.RoomServiceImpl">
+				<property name="roomDAO" ref="RoomDAO"/>
+				<property name="hotelDAO" ref="HotelDAO"></property>
+			</bean>
+		</property>
+	</bean>
+
 	<bean id="BookingService" parent="transactionProxyTemplate">
 		<property name="target">
 			<bean class="vn.framgia.service.impl.BookingServiceImpl">
@@ -19,15 +28,6 @@
 			</bean>
 		</property>
 	</bean>
-	
-    <bean id="RoomService" parent="transactionProxyTemplate">
-        <property name="target">
-            <bean class="vn.framgia.service.impl.RoomServiceImpl">
-                <property name="roomDAO" ref="RoomDAO"/>
-                <property name="hotelDAO" ref="HotelDAO"></property>
-            </bean>
-        </property>
-    </bean>
 
     <bean id="HotelService" parent="transactionProxyTemplate">
         <property name="target">
@@ -36,4 +36,12 @@
             </bean>
         </property>
     </bean>
+
+	<bean id="ItemService" parent="transactionProxyTemplate">
+		<property name="target">
+			<bean class="vn.framgia.service.impl.ItemServiceImpl">
+				<property name="itemDAO" ref="ItemDAO"/>
+			</bean>
+		</property>
+	</bean>
 </beans>

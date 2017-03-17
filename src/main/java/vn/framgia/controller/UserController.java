@@ -30,7 +30,7 @@ public class UserController {
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    private IUserService userService;
+	private IUserService userService;
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
 	public String createUser(Model model, @ModelAttribute(value = "userForm") UserBean userForm) {

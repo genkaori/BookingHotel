@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by FRAMGIA\duong.van.tien on 06/03/2017.
- * 
+ *
  */
 public class RoomBean implements Serializable{
     private int id;

@@ -76,7 +76,7 @@ public class RoomController {
         if(!checkAdd) {
             List<RoomBean> listRoomsBean = roomService.findAllRooms();
             view.addObject("listRoomsBean", listRoomsBean);
-            view.setViewName("rooms");
+            view.setViewName("newRoom");
             view.addObject("err_addRoom", "Add room, the error occurred!");
             return view;
         }
