@@ -20,17 +20,17 @@
         <property name="note" type="java.lang.String">
             <column name="NOTE" />
         </property>
-        <many-to-one name="client" class="vn.framgia.model.Client" fetch="join">
+        <many-to-one name="client" class="vn.framgia.model.Client" fetch="select">
             <column name="CLIENTID" />
         </many-to-one>
-        <many-to-one name="room" class="vn.framgia.model.Room" fetch="join">
+        <many-to-one name="room" class="vn.framgia.model.Room" fetch="select">
             <column name="ROOMID" />
         </many-to-one>
         <property name="isCheckIn" type="int">
             <column name="ISCHECKIN" />
         </property>
 
-        <list name="items" cascade="all" table="tblUsedItem" lazy="true" fetch="select">
+        <list name="items" cascade="all" table="tblUsedItem" lazy="false" fetch="select">
             <key column="bookingId"/>
             <index column="idx"/>
             <many-to-many column="itemId" class="vn.framgia.model.Item"/>

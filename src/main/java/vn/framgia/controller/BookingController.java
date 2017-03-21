@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -130,7 +128,7 @@ public class BookingController {
     @RequestMapping(value = "/bookingAction", method = RequestMethod.POST)
     public ModelAndView bookingAction(@ModelAttribute("clientBeanForm") ClientBean clientBean,
           @ModelAttribute("roomBeanForm") RoomBean roomBean,
-          @ModelAttribute("bookingBeanForm") BookingBean bookingBean) {
+          @ModelAttribute("bookingBeanForm") BookingBean bookingBean, Model model) {
         try {
             ModelAndView view = new ModelAndView();
             Integer clientId = clientService.addClient(clientBean);
@@ -143,6 +141,10 @@ public class BookingController {
             if (!check) {
                 List<RoomBean> listRoomsBean = roomService.findAllRooms();
                 view.addObject("listRoomsBean", listRoomsBean);
+                ConditionBookingBean conditionBookingBean = new ConditionBookingBean();
+                conditionBookingBean.setStartDate("");
+                conditionBookingBean.setEndDate("");
+                model.addAttribute("conditionBookingBeanForm", conditionBookingBean);
                 view.setViewName("viewBooking");
                 view.addObject("err_addBooking", "Add booking, the error occurred!");
                 return view;

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.framgia.bean.ItemBean;
 import vn.framgia.service.IItemService;
-
 import java.util.List;
+import vn.framgia.model.Item;
+import java.util.ArrayList;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
  * Created by FRAMGIA\duong.van.tien on 08/03/2017.
@@ -98,5 +101,18 @@ public class ItemController {
             return view;
         }
         return new ModelAndView("redirect:items");
+    }
+
+    @RequestMapping(value = "/search_item", method = RequestMethod.GET)
+    public @ResponseBody List<Item> searchItem(@RequestParam(value = "itemName") String itemName) {
+        List<Item> listItemBean = itemService.findItemByName(itemName);
+        System.out.println(" size : "+listItemBean);
+        ModelAndView view = new ModelAndView();
+        if (listItemBean == null) {
+            view.addObject("listRoomBeamEmpty", "Result is empty");
+            view.setViewName("items");
+            return new ArrayList<Item>();
+        }
+        return listItemBean;
     }
 }

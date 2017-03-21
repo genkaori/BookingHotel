@@ -5,48 +5,100 @@
   Time: 13:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<section class="wrapper">
-    <h3>List items</h3>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="content-panel">
-                <hr>
-                <c:if test="${!empty listItemsBeanEmpty}">
-                    <h3  style="color: red"><c:out value="${listItemsBeanEmpty}"/></h3>
-                </c:if>
-                <c:if test="${!empty listItemsBean}">
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<div class="bootstrap-iso">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form:form id="formSearch" action="searchbill" class="form-horizontal" method="post">
+                    <div class="form-group " style="text-align: center;">
+                        <div class="col-sm-8">
+                            <div style="margin-top: 10px; ">
+                                <input type="text" class="form-control" id="itemName" name="itemName">
+                            </div>
+                        </div>
+                        <label class="control-label col-sm-4 requiredField">
+                            <input id="btnSearch" class="btn btn-success btn-sm pull-left" type="submit" value="Search">
+                        </label>
+                    </div>
+                </form:form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-mt">
+    <div class="col-md-12">
+        <div class="content-panel">
+            <h3 style="color: #843534">List items</h3>
+            <hr>
+            <c:if test="${!empty listItemsBeanEmpty}">
+                <h3 style="color: red"><c:out value="${listItemsBeanEmpty}"/></h3>
+            </c:if>
+            <c:if test="${!empty listItemsBean}">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Room name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Permision</th>
+                        <th class="col-sm-1" style="color: #843534; text-align: center">STT</th>
+                        <th class="col-sm-2" style="color: #843534; text-align: center">Room name</th>
+                        <th class="col-sm-2" style="color: #843534; text-align: center">Price</th>
+                        <th class="col-sm-5" style="color: #843534; text-align: center">Description</th>
+                        <th class="col-sm-2" style="color: #843534; text-align: center">Permision</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${listItemsBean}" var="item">
-                    <tr>
-                        <td><a href=""><c:out value="${item.id}"/></a></td>
-                        <td><c:out value="${item.name}"/></td>
-                        <td><c:out value="${item.price}"/></td>
-                        <td><c:out value="${item.description}"/></td>
-                        <td>
-                            <button class="btn btn-primary btn-xs"><a href="/edit_item?id=${item.id}">Edit</a></button>
-                            <button class="btn btn-danger btn-xs"><a href="/delete_item?id=${item.id}">Delete</a></button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="col-sm-1" style="text-align: center"><a href=""><c:out value="${item.id}"/></a>
+                            </td>
+                            <td class="col-sm-2"><c:out value="${item.name}"/></td>
+                            <td class="col-sm-2" style="text-align: center"><c:out value="${item.price}"/></td>
+                            <td class="col-sm-5"><c:out value="${item.description}"/></td>
+                            <td style="text-align: center">
+                                <a class="btn btn-primary btn-xs" href="/edit_item?id=${item.id}">Edit</a>
+                                <a class="btn btn-danger btn-xs" href="/delete_item?id=${item.id}">Delete</a>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                </c:if>
+            </c:if>
 
-                <div class="btn">
-                    <a href="${pageContext.request.contextPath}/new_item">Add New Item</a>
-                </div>
+            <div class="btn">
+                <a href="${pageContext.request.contextPath}/new_item" class="btn btn-success btn-sm pull-left">
+                    Add New Item</a>
             </div>
         </div>
     </div>
-</section>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[id='btnSearch']").on('click', function () {
+            var itemName = $("#itemName").val();
+            $.ajax({
+                url: "/search_item", type: "GET", dataType: "json",
+                data: {itemName: itemName.toString()},
+                success: function (data) {
+                    console.log(data);
+                    console.log(data[0]);
+                    var html = '';
+                    $.each(data, function (key, value) {
+                        html +=
+                        '<tr>'
+                            +'<td class="col-sm-1" style="text-align: center">'+value.id+'</td>'
+                            +'<td class="col-sm-2">'+value.name+'</td>'
+                            +'<td class="col-sm-2" style="text-align: center">'+value.price+'</td>'
+                            +'<td class="col-sm-5">'+value.description+'</td>'
+                            +'<td style="text-align: center">'
+                            +'<a class="btn btn-primary btn-xs" href="/edit_item?id='+value.id+'">Edit</a>'
+                            +'<a class="btn btn-danger btn-xs" href="/delete_item?id='+value.id+'">Delete</a>'
+                            +'</td>'
+                        +'</tr>'
+                    });
+                    $('tbody:first').html(html);
+                }
+            });
+        })
+    });
+
+</script>

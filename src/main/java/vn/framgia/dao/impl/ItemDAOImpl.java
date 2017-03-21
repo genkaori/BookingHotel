@@ -2,7 +2,11 @@ package vn.framgia.dao.impl;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import vn.framgia.bean.ItemBean;
 import vn.framgia.dao.GenericDAO;
 import vn.framgia.dao.IItemDAO;
@@ -21,13 +25,16 @@ public class ItemDAOImpl extends GenericDAO<Item, Integer> implements IItemDAO {
     }
 
     @Override
-    public List<ItemBean> findItemByName(String itemName) {
+    public List<Item> findItemByName(String itemName) {
         if(itemName.isEmpty()) {
             return null;
         }
-        Criteria criteria = getSession().createCriteria(Item.class);
+        Criteria criteria = getSession().createCriteria(Item.class, "item");
         criteria.add(Restrictions.like("name","%"+itemName+"%"));
-        List<ItemBean> list = criteria.list();
+        List<Item> list = criteria.list();
+        for (Item item:list){
+            item.setBookings(null);
+        }
         return list;
     }
 
