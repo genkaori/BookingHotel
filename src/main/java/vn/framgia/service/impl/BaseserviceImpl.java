@@ -7,7 +7,7 @@ import vn.framgia.dao.IRoomDAO;
 import vn.framgia.dao.IUserDAO;
 import vn.framgia.dao.IItemDAO;
 import vn.framgia.dao.IUserServiceDAO;
-
+import vn.framgia.dao.IClientDAO;
 import java.io.Serializable;
 
 /**
@@ -23,6 +23,7 @@ public class BaseserviceImpl implements Serializable {
     protected IItemDAO itemDAO;
     protected IBillDAO billDAO;
     protected IUserServiceDAO userServiceDAO;
+    protected IClientDAO clientDAO;
 
     public IUserDAO getUserDAO() {
         return userDAO;
@@ -63,7 +64,7 @@ public class BaseserviceImpl implements Serializable {
     public void setItemDAO(IItemDAO itemDAO) {
         this.itemDAO = itemDAO;
     }
-    
+
 	public IBillDAO getBillDAO() {
 		return billDAO;
 	}
@@ -80,4 +81,11 @@ public class BaseserviceImpl implements Serializable {
 		this.userServiceDAO = userServiceDAO;
 	}
     
+    public IClientDAO getClientDAO() {
+        return clientDAO;
+    }
+
+    public void setClientDAO(IClientDAO clientDAO) {
+        this.clientDAO = clientDAO;
+    }
 }

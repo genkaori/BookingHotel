@@ -1,7 +1,7 @@
 package vn.framgia.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by FRAMGIA\duong.van.tien on 17/03/2017.
@@ -12,7 +12,7 @@ public class Item {
     private float price;
     private String description;
 
-    private Set<Booking> bookings = new HashSet<Booking>();
+    List bookings = new ArrayList();
 
     public Item() {}
 
@@ -48,11 +48,15 @@ public class Item {
         this.description = description;
     }
 
-    public Set<Booking> getBookings() {
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
+
+    public List getBookings() {
         return bookings;
     }
 
-    public void setBookings(Set<Booking> bookings) {
+    public void setBookings(List bookings) {
         this.bookings = bookings;
     }
 }

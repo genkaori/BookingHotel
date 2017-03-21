@@ -49,6 +49,7 @@
 				<value>classpath*:vn/framgia/model/UsedItem.hbm.xml</value>
 			</list>
 		</property>
+
 	</bean>
 
 	<!-- Transaction manager for a single Hibernate SessionFactory -->

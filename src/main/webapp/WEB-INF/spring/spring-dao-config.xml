@@ -35,7 +35,7 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
-	
+
 	<bean id="BillDAO" class="vn.framgia.dao.impl.BillDAOImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -45,6 +45,12 @@
 	<bean id="UserServiceDAO" class="vn.framgia.dao.impl.UserServiceDAOImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="ClientDAO" class="vn.framgia.dao.impl.ClienDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
 </beans>
