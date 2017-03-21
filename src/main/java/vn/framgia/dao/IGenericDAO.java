@@ -16,7 +16,7 @@ public interface IGenericDAO<E, Id extends Serializable> extends Serializable {
 
 	public int count(E exampleInstance, String[] excludeProperty, boolean isLike);
 
-	public int count();
+	public Long count();
 
 	public int count(Criterion... criterion);
 
@@ -25,5 +25,7 @@ public interface IGenericDAO<E, Id extends Serializable> extends Serializable {
 	public void delete(E entity);
 
 	public List<E> findByCriteria(Criterion... criterion);
+
+	public List<E> list(Integer offset, Integer maxResults);
 	
 }

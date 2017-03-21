@@ -1,7 +1,7 @@
 package vn.framgia.service;
 
 import vn.framgia.bean.ItemBean;
-
+import vn.framgia.model.Item;
 import java.io.Serializable;
 import java.util.List;
 import vn.framgia.model.Item;
@@ -18,4 +18,6 @@ public interface IItemService extends Serializable {
     public boolean deleteItem(int id);
     public ItemBean getItemBeanById(int id);
     public List<Item> findItemByName(String seriveName);
+    public List<ItemBean> list(Integer offset, Integer maxResults);
+    public Long count();
 }

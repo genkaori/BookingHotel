@@ -84,8 +84,8 @@ public abstract class GenericDAO<E, Id extends Serializable> extends HibernateDa
 		return (Integer) crit.add(example).setProjection(Projections.rowCount()).uniqueResult();
 	}
 
-	public int count() {
-		return (Integer) getSession().createCriteria(this.getPersistentClass()).setProjection(Projections.rowCount())
+	public Long count() {
+		return  (Long)getSession().createCriteria(this.getPersistentClass()).setProjection(Projections.rowCount())
 				.uniqueResult();
 	}
 
@@ -117,6 +117,14 @@ public abstract class GenericDAO<E, Id extends Serializable> extends HibernateDa
 			crit.add(c);
 		}
 		return crit.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<E> list(Integer offset, Integer maxResults) {
+		return getSession().createCriteria(getPersistentClass())
+				.setFirstResult(offset!=null?offset:0)
+				.setMaxResults(maxResults!=null?maxResults:15)
+				.list();
 	}
 
 }

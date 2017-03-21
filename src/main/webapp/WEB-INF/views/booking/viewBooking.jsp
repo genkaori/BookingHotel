@@ -88,6 +88,9 @@
                                                value="${conditionBookingBeanForm.startDate}"/>
                                     </div>
                                 </div>
+                                <label class="control-label col-sm-12 requiredField">
+                                    <h5>${err_empty}</h5>
+                                </label>
                             </div>
 
                             <div class="form-group ">
