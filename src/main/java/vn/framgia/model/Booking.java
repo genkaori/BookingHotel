@@ -16,6 +16,10 @@ public class Booking implements Serializable {
 	public Booking() {
 		super();
 	}
+	
+	public Booking(Integer id) {
+		this.id = id;
+	}
 
 	public Booking(Integer id, Date checkIn, Date checkOut, Float totalPrice,
 			String note, Client client, Room room, Integer isCheckIn) {
@@ -70,20 +74,20 @@ public class Booking implements Serializable {
 		this.note = note;
 	}
 
-	public Client getClientId() {
+	public Client getClient() {
 		return client;
 	}
 
-	public void setClientId(Client clientId) {
-		this.client = clientId;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
-	public Room getRoomId() {
+	public Room getRoom() {
 		return room;
 	}
 
-	public void setRoomId(Room roomId) {
-		this.room = roomId;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	public Integer getIsCheckIn() {

@@ -11,7 +11,7 @@ import vn.framgia.dao.GenericDAO;
 import vn.framgia.dao.IBookingDAO;
 import vn.framgia.model.Booking;
 
-public class BookingDAOImpl extends GenericDAO<Booking, Long> implements IBookingDAO{
+public class BookingDAOImpl extends GenericDAO<Booking, Integer> implements IBookingDAO{
 	public BookingDAOImpl(){
 		super.setPersistentClass(Booking.class);
 	}
@@ -19,18 +19,18 @@ public class BookingDAOImpl extends GenericDAO<Booking, Long> implements IBookin
 	@Override
 	public List<Booking> findAllOrderClientId() {
 		Criteria criteria = getSession().createCriteria(Booking.class);
-		criteria.addOrder(Order.desc("clientId.id"));
+		criteria.addOrder(Order.desc("client.id"));
 		return criteria.list();
 	}
 	
 	@Override
 	public List<Booking> findBillByNameClient(String stringSearch) {
 		Criteria criteria = getSession().createCriteria(Booking.class);
-		criteria.createAlias("clientId", "clientId");
-		Criterion criterionName = Restrictions.like("clientId.fullName", "%"+stringSearch+"%");
-		Criterion criterionCMT = Restrictions.eq("clientId.cardNumber", stringSearch);
-		Criterion criterionPhone = Restrictions.eq("clientId.phone", stringSearch);
-		Criterion criterionAddress = Restrictions.like("clientId.address", "%"+stringSearch+"%");
+		criteria.createAlias("client", "client");
+		Criterion criterionName = Restrictions.like("client.fullName", "%"+stringSearch+"%");
+		Criterion criterionCMT = Restrictions.eq("client.cardNumber", stringSearch);
+		Criterion criterionPhone = Restrictions.eq("client.phone", stringSearch);
+		Criterion criterionAddress = Restrictions.like("client.address", "%"+stringSearch+"%");
 		
 		criteria.add(Restrictions.or(
 				Restrictions.or(criterionCMT, criterionPhone),

@@ -23,23 +23,23 @@ public class BookingServiceImpl extends BaseserviceImpl implements IBookingServi
 				ShowBookingBean bookingBean = null;
 				int buffer = 0;
 				for (Booking book : listBooking) {
-					if(buffer != book.getClientId().getId() && buffer != 0) {
+					if(buffer != book.getClient().getId() && buffer != 0) {
 						results.add(listObj);
 					}
-					if(buffer != book.getClientId().getId()){
+					if(buffer != book.getClient().getId()){
 						listObj = new ArrayList<ShowBookingBean>();
 					}
 					bookingBean = new ShowBookingBean();
 					bookingBean.setBookingId(book.getId());
-					bookingBean.setNameClient(book.getClientId().getFullName());
-					bookingBean.setNameRoom(book.getRoomId().getName());
+					bookingBean.setNameClient(book.getClient().getFullName());
+					bookingBean.setNameRoom(book.getRoom().getName());
 					bookingBean.setCheckIn(Helpers.convertDatetoString(book.getCheckIn()));
 					bookingBean.setCheckOut(Helpers.convertDatetoString(book.getCheckOut()));
-					bookingBean.setPriceRoom((int)(book.getTotalPrice() + getTotalPriceService(book.getId())));
+					bookingBean.setPriceRoom((int)(float)book.getTotalPrice());
 					bookingBean.setStatus(checkStatusBooking(book));
 					
 					listObj.add(bookingBean);
-					buffer = book.getClientId().getId();
+					buffer = book.getClient().getId();
 				}
 				results.add(listObj);
 				return results;
@@ -66,7 +66,12 @@ public class BookingServiceImpl extends BaseserviceImpl implements IBookingServi
 	@Override
 	public List<List<ShowBookingBean>> searchBookingByNameClient(String nameClient) {
 		try {
-			List<Booking> listBooking = bookingDAO.findBillByNameClient(nameClient);
+			List<Booking> listBooking = null;
+			if (nameClient.isEmpty()) {
+				listBooking = bookingDAO.findAllOrderClientId();
+			} else {
+				listBooking = bookingDAO.findBillByNameClient(nameClient);
+			}
 			if (!Helpers.isEmpty(listBooking)) {
 				return showBooking(listBooking);
 			}
@@ -84,11 +89,11 @@ public class BookingServiceImpl extends BaseserviceImpl implements IBookingServi
 				for (Bill bill : lstBill) {
 					payment += bill.getPaymentAmount();
 				}
-				float totalServiceFollow = getTotalPriceService(booking.getId()); 
-				if((booking.getTotalPrice() + totalServiceFollow) <= payment){
+				//float totalServiceFollow = getTotalPriceService(booking.getId()); 
+				if(booking.getTotalPrice() <= payment){
 					return ShowBookingBean.STATUS_OK;
 				}
-				if(payment < (booking.getTotalPrice() + totalServiceFollow) && payment != 0f){
+				if(payment < booking.getTotalPrice() && payment != 0f){
 					return ShowBookingBean.STATUS_NOT;
 				}
 			}

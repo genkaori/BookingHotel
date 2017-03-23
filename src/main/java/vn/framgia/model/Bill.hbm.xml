@@ -17,10 +17,10 @@
         <property name="note" type="java.lang.String">
             <column name="NOTE" />
         </property>
-        <many-to-one name="bookingId" class="vn.framgia.model.Booking" fetch="select">
+        <many-to-one name="booking" class="vn.framgia.model.Booking" fetch="select">
             <column name="BOOKINGID" />
         </many-to-one>
-        <many-to-one name="userId" class="vn.framgia.model.User" fetch="select">
+        <many-to-one name="user" class="vn.framgia.model.User" fetch="select">
             <column name="USERID" />
         </many-to-one>
     </class>
