@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.framgia.bean.UserBean;
+import vn.framgia.security.CustomUserDetail;
 import vn.framgia.service.IUserService;
 import vn.framgia.util.Helpers;
 import vn.framgia.util.InputCondition;
@@ -134,4 +136,18 @@ public class UserController {
     	}
     	return new ModelAndView("redirect:listUser");
     }
+	
+	@RequestMapping(value = "/showProfile", method = RequestMethod.GET)
+	public ModelAndView showpProfile() {
+		if(Helpers.getIdUser() == 0){
+			return new ModelAndView("login");
+		}
+		UserBean userBean = userService.getIdProfile(Helpers.getIdUser());
+		ModelAndView modelAndView = new ModelAndView("showProfile");
+		if (userBean == null)
+			modelAndView.addObject("errShowProfile", "show profile has error");
+		else 
+			modelAndView.addObject("userBean", userBean);
+		return modelAndView;
+	}
 }

@@ -19,7 +19,7 @@
 	</div>
 	<div class="input-group input-sm">
 		<label for="password">Password</label>
-		<form:input path="password" class="form-control" id="password" />
+		<form:input path="password" class="form-control" id="password" type = "password"/>
 
 	</div>
 
@@ -38,8 +38,8 @@
 	<div class="input-group input-sm">
 		<label for="role">Role</label> <select name="role"
 			class="form-control" id="role">
-			<option value="user" selected="selected">User</option>
-			<option value="admin">Admin</option>
+			<option value="user" selected="selected">ROLE_USER</option>
+			<option value="admin">ROLE_ADMIN</option>
 		</select>
 	</div>
 

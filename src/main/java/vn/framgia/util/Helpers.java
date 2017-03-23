@@ -8,6 +8,10 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import vn.framgia.security.CustomUserDetail;
+
 /**
  * Created by FRAMGIA\duong.van.tien on 06/03/2017.
  *
@@ -375,5 +379,13 @@ public final class Helpers {
     	}catch(Exception e){
     		return "";
     	}
+    }
+    
+    public static int getIdUser(){
+    	CustomUserDetail userDetail = (CustomUserDetail)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	if(userDetail == null){
+    		return 0;
+    	}
+    	return Integer.valueOf(userDetail.getUserId());
     }
 }

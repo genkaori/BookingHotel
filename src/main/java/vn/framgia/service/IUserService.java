@@ -18,4 +18,5 @@ public interface IUserService extends Serializable{
     public CustomUserDetail getUserByAcount(String username);
     public UserBean getUserById(int id);
     public boolean updateUser(UserBean userBean);
+    public UserBean getIdProfile(int id);
 }
