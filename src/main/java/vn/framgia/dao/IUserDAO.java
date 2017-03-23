@@ -8,4 +8,5 @@ import vn.framgia.model.User;
  */
 public interface IUserDAO extends IGenericDAO<User, Integer>{
 	public User getUserByAcount(String username);
+	public User getUserById(int id);
 }

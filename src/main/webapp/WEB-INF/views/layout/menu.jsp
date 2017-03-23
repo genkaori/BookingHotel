@@ -5,7 +5,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
         	  <p class="centered"><a href="#"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-        	  <h5 class="centered">${pageContext.request.userPrincipal.name}</h5>
+        	  <h5 class="centered"><a href="${pageContext.request.contextPath}/showProfile">${pageContext.request.userPrincipal.name}</a></h5>
             <li class="sub-menu">
                 <a class="active" href="javascript:;" >
                     <i class="fa fa-desktop"></i>

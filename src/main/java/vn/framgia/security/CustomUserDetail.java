@@ -24,7 +24,7 @@ public class CustomUserDetail implements UserDetails{
         if (((username == null) || "".equals(username)) || (password == null)) {
             throw new IllegalArgumentException("Cannot pass null or empty values to constructor");
         }
-
+        this.userId = userId;	
         this.username = username;
         this.password = password;
         this.authorities = authorities;

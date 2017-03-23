@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<h2 class="margin-bottom-10">Add New User</h2>
+<h2 class="margin-bottom-10">Edit User</h2>
 <form:form action="${pageContext.request.contextPath}/updateUser"
 	modelAttribute="userForm" class="templatemo-login-form" method="post">
 	<c:if test="${!empty errUpdateUser}">
@@ -40,7 +40,7 @@
 					<label class="col-sm-2 col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
 						<p id="errPassword" style="color: red"></p>
-						<input class="form-control" name="password" type="text"
+						<input class="form-control" name="password" type="password"
 							path="password" value="${userForm.password}">
 					</div>
 				</div>
@@ -72,8 +72,8 @@
 						update if you want
 					</div>
 					<select name="role" class="form-control" id="role">
-						<option value="user" selected="selected">User</option>
-						<option value="admin">Admin</option>
+						<option value="user" selected="selected">ROLE_USER</option>
+						<option value="admin">ROLE_ADMIN</option>
 					</select>
 				</div>
 				<div style="text-align: left">
