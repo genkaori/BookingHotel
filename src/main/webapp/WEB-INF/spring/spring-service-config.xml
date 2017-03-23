@@ -25,6 +25,8 @@
 		<property name="target">
 			<bean class="vn.framgia.service.impl.BookingServiceImpl">
 				<property name="bookingDAO" ref="BookingDAO"/>
+				<property name="billDAO" ref="BillDAO"/>
+				<property name="userServiceDAO" ref="UserServiceDAO"/>
 			</bean>
 		</property>
 	</bean>
