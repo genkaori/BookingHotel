@@ -1,6 +1,7 @@
 package vn.framgia.dao.impl;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import vn.framgia.dao.GenericDAO;
@@ -29,7 +30,8 @@ public class UserDAOImpl extends GenericDAO<User, Integer> implements IUserDAO {
 
 	@Override
 	public User getUserById(int id) {
-		Criteria criteria = getSession().createCriteria(User.class);
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(User.class);
 		criteria.add(Restrictions.eq("id", id));
 		User obj = (User)criteria.uniqueResult();
 		if (obj == null) {

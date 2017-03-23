@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="vn.framgia.model.FileUpload" table="files_upload">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="file_name" type="java.lang.String">
+            <column name="FILE_NAME" />
+        </property>
+        <property name="file_data" type="java.lang.String">
+            <column name="FILE_DATA" />
+        </property>
+    </class>
+</hibernate-mapping>
