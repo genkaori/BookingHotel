@@ -14,6 +14,8 @@
 	<!-- Custom styles for this template -->
 	<link href="assets/css/style.css" rel="stylesheet">
 	<link href="assets/css/style-responsive.css" rel="stylesheet">
+	<link href="assets/css/mystyle.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css"/>
 
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="assets/js/jquery.js"></script>

@@ -26,6 +26,6 @@
             <column name="description" length="200"/>
         </property>
 
-        <many-to-one name="hotel" class="vn.framgia.model.Hotel" column="hotelId" not-null="true" fetch="join"/>
+        <many-to-one name="hotel" class="vn.framgia.model.Hotel" column="hotelId" not-null="true" fetch="select"/>
     </class>
 </hibernate-mapping>

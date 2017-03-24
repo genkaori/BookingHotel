@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.framgia.bean.BillBean;
+import vn.framgia.bean.BillBeanClient;
 import vn.framgia.bean.PaymentBean;
 import vn.framgia.service.IPaymentService;
 import vn.framgia.util.Helpers;
@@ -44,5 +45,17 @@ public class PaymentBillController {
 		PaymentBean paymentBeans = paymentService.getinfoPayment(Integer.valueOf(bookingId));
 		model.put("paymentBean", paymentBeans);
 		return new ModelAndView("payment", model);
+	}
+	
+	@RequestMapping(value="/detailbill")
+	public ModelAndView redirectDetailBill(@RequestParam("id") String bookingId){
+		logger.info("-------------- print Payment Bill");
+		BillBeanClient beanClient = paymentService.getInfoPrintlBill(Integer.valueOf(bookingId));
+		if(beanClient != null){
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("beanClient", beanClient);
+			return new ModelAndView("detailbill", model);
+		}
+		return new ModelAndView("detailbill");
 	}
 }

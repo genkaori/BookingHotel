@@ -14,7 +14,7 @@
                 <ul class="sub">
                     <li><a style="font-size: medium;" href="index">HOME</a></li>
                 <c:if test="${!empty pageContext.request.userPrincipal.name}">
-                    <li><a style="font-size: medium;" href="#">BOOKING</a></li>
+                    <li><a style="font-size: medium;" href="viewBooking">BOOKING</a></li>
                     <li><a style="font-size: medium;" href="showbooking">SHOWBOOKING</a></li>
                 </c:if>
                 </ul>

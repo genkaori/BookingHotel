@@ -56,6 +56,7 @@
 				<property name="userServiceDAO" ref="UserServiceDAO"/>
 				<property name="billDAO" ref="BillDAO"/>
 				<property name="bookingDAO" ref="BookingDAO"/>
+				<property name="userDAO" ref="UserDAO"/>
 			</bean>
 		</property>
 	</bean>

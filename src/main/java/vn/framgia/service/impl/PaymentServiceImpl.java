@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.mvel2.sh.command.basic.Help;
 
 import vn.framgia.bean.BillBean;
+import vn.framgia.bean.BillBeanClient;
+import vn.framgia.bean.BillDetailBean;
 import vn.framgia.bean.PaymentBean;
 import vn.framgia.bean.PaymentDetail;
 import vn.framgia.model.Bill;
@@ -133,4 +134,63 @@ public class PaymentServiceImpl extends BaseserviceImpl implements IPaymentServi
 		return lstHistory;
 	}
 
+	@Override
+	public BillBeanClient getInfoPrintlBill(int bookingId) {
+		BillBeanClient beanClient = new BillBeanClient();
+		try {
+			Booking booking = bookingDAO.findById(bookingId);
+			if (booking == null) {
+				return null;
+			}
+			beanClient.setAddress(booking.getClient().getAddress());
+			beanClient.setCustomer(booking.getClient().getFullName());
+			beanClient.setDay(String.valueOf(Helpers.getComponentDate(new Date(), BillBeanClient.DAY)));
+			beanClient.setMonth(String.valueOf(Helpers.getComponentDate(new Date(), BillBeanClient.MONTH)));
+			beanClient.setYear(String.valueOf(Helpers.getComponentDate(new Date(), BillBeanClient.YEAR)));
+			beanClient.setPhone(booking.getClient().getPhone());
+			beanClient.setDetailBean(getBillDetailBean(booking));
+			User user = userDAO.getUserById(Helpers.getIdUser());
+			if(user != null){
+				beanClient.setCreateBy(user.getFullname());
+			}
+
+		} catch (Exception e) {
+			logger.error("ERROR GET DETAIL BILL CLIENT: ", e);
+			return null;
+		}
+		return beanClient;
+	}
+	
+	public BillDetailBean getBillDetailBean(Booking booking) {
+		BillDetailBean billDetailBean = new BillDetailBean();
+		try{
+			if(booking == null){
+				return billDetailBean;
+			}
+			billDetailBean.setPriceRoom((int)(float)booking.getRoom().getPrice());
+			billDetailBean.setRoom(booking.getRoom().getName());
+			billDetailBean.setServiceFollow(getServicefollow(booking.getId()));
+			billDetailBean.setTotalRoom((int)(float)booking.getTotalPrice());
+		}catch(Exception e){
+			logger.error("ERROR GET BILL DETAIL BEAN: ", e);
+		}
+		return billDetailBean;
+	}
+	
+	public List<PaymentDetail> getServicefollow(Integer bookingId) {
+		List<PaymentDetail> lstPaymentDetail = new ArrayList<PaymentDetail>();
+		try {
+			List<UsedItem> lstUserItems = userServiceDAO.findServiceByBookingId(bookingId);
+			if (Helpers.isEmpty(lstUserItems)) {
+				return lstPaymentDetail;
+			}
+			for (UsedItem userItem : lstUserItems) {
+				lstPaymentDetail.add(new PaymentDetail(userItem.getItem()
+						.getName(), (int)userItem.getItem().getPrice()));
+			}
+		} catch (Exception e) {
+			logger.error("ERROR GET SERVICE FOLLOW: ", e);
+		}
+		return lstPaymentDetail;
+	} 
 }
