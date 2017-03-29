@@ -134,6 +134,12 @@ public class BookingController {
             Integer clientId = clientService.addClient(clientBean);
             if(clientId == null) {
                 view.addObject("err_addClient", "Add client, the error occurred!");
+                List<RoomBean> listRoomsBean = roomService.findAllRooms();
+                view.addObject("listRoomsBean", listRoomsBean);
+                ConditionBookingBean conditionBookingBean = new ConditionBookingBean();
+                conditionBookingBean.setStartDate("");
+                conditionBookingBean.setEndDate("");
+                model.addAttribute("conditionBookingBeanForm", conditionBookingBean);
                 view.setViewName("viewBooking");
                 return view;
             }

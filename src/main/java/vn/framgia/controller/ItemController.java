@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.framgia.bean.ItemBean;
+import vn.framgia.model.Item;
 import vn.framgia.service.IItemService;
+import java.util.ArrayList;
 import java.util.List;
 import vn.framgia.model.Item;
 import java.util.ArrayList;
@@ -52,9 +51,11 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/items", method = RequestMethod.GET)
-    public ModelAndView showListItems() {
+    public ModelAndView showListItems(Model model, Integer offset, Integer maxResults) {
         ModelAndView view = new ModelAndView("items");
-        List<ItemBean> listItemsBean = itemService.getAllItems();
+        List<ItemBean> listItemsBean = itemService.list(offset, maxResults);
+        model.addAttribute("count", itemService.count());
+        model.addAttribute("offset", offset);
         if(listItemsBean == null)
             view.addObject("listItemsBeanEmpty", "List items is empty");
         view.addObject("listItemsBean", listItemsBean);

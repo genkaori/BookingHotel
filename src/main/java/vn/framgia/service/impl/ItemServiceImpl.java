@@ -104,4 +104,28 @@ public class ItemServiceImpl extends BaseserviceImpl implements IItemService {
         }
         return null;
     }
+
+    @Override
+    public List<ItemBean> list(Integer offset, Integer maxResults) {
+        try {
+            List<Item> listItems = itemDAO.list(offset, maxResults);
+            if(!Helpers.isEmpty(listItems)) {
+                List<ItemBean> listItemsBean = new ArrayList<ItemBean>();
+                for(Item item : listItems) {
+                    ItemBean itemBean = new ItemBean();
+                    BeanUtils.copyProperties(item, itemBean);
+                    listItemsBean.add(itemBean);
+                }
+                return listItemsBean;
+            }
+        } catch (Exception e) {
+            logger.error("Exception at function list in ItemServiceImpl : ", e);
+        }
+        return null;
+    }
+
+    @Override
+    public Long count() {
+        return itemDAO.count();
+    }
 }
