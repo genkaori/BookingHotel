@@ -95,9 +95,9 @@ public class ItemServiceImpl extends BaseserviceImpl implements IItemService {
     }
 
     @Override
-    public List<ItemBean> findItemByName(String itemName) {
+    public List<Item> findItemByName(String itemName) {
         try {
-            List<ItemBean> list = itemDAO.findItemByName(itemName);
+            List<Item> list = itemDAO.findItemByName(itemName);
             return list;
         } catch (Exception e) {
             logger.error("Exception in function findItemByName (package service) : ", e);

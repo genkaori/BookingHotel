@@ -10,7 +10,7 @@ import java.util.List;
  *
  */
 public interface IItemDAO extends IGenericDAO<Item, Integer> {
-    public List<ItemBean> findItemByName(String serviceName);
+    public List<Item> findItemByName(String serviceName);
     public ItemBean getItemBeanById(Integer id);
     public Item getItemById(Integer id);
 }

@@ -60,6 +60,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <p id="err_startDate" style="color: red"></p>
             <p id="err_endDate" style="color: red"></p>
+            <p style="color: red"><h5>${err_empty}</h5></p>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12"></div>
     </div>
@@ -87,9 +88,6 @@
                                                value="${conditionBookingBeanForm.startDate}"/>
                                     </div>
                                 </div>
-                                <label class="control-label col-sm-12 requiredField">
-                                    <h5>${err_empty}</h5>
-                                </label>
                             </div>
 
                             <div class="form-group ">
@@ -172,7 +170,7 @@
                                 <div class="row">
                                     <div class="col-sm-3 col-xs-3 goleft"></div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <a class="btn btn-theme" id="btnSubmit"> Booking </a>
+                                        <a class="btnSubmit btn btn-theme"> Booking </a>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +224,7 @@
         return false;
     }
 
-    $('#btnSubmit').on("click", function (e) {
+    $('.btnSubmit').on("click", function (e) {
         e.preventDefault();
         var startDateVal = $("#startDate").val();
         var endDateVal = $("#endDate").val();
@@ -258,4 +256,23 @@
             $("#formSearch").submit();
         }
     });
+
+    $(document).ready(function() {
+        $("a[id='btnSearch']").on('click', function(e){
+            e.preventDefault();
+            var startDateVal = $("#startDate").val();
+            var endDateVal = $("#endDate").val();
+            $.ajax({url: "/searchRoomCondition",type: "POST",dataType: "json",
+                data: {startDateVal: startDateVal.toString(), endDateVal: endDateVal.toString()},
+                success: function(data){
+                    console.log(data);
+                    var html = '';
+                }
+            });
+        })
+    });
+
+    function logout() {
+        $('#logoutForm').submit();
+    };
 </script>
