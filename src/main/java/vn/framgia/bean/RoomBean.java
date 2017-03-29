@@ -14,6 +14,8 @@ public class RoomBean implements Serializable{
     private String description;
     private Integer hotelId;
     private Hotel hotel;
+    private String start;
+    private String end;
 
     public RoomBean() {}
 
@@ -71,5 +73,21 @@ public class RoomBean implements Serializable{
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

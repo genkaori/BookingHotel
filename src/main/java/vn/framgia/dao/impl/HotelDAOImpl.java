@@ -12,7 +12,7 @@ import vn.framgia.service.impl.RoomServiceImpl;
  * Created by FRAMGIA\duong.van.tien on 13/03/2017.
  */
 public class HotelDAOImpl extends GenericDAO<Hotel, Integer> implements IHotelDAO {
-    private static final Logger logger = Logger.getLogger(RoomServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(HotelDAOImpl.class);
 
 
     public HotelDAOImpl() {

@@ -1,7 +1,9 @@
 package vn.framgia.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Client implements Serializable {
 	private Integer id;
@@ -10,6 +12,7 @@ public class Client implements Serializable {
 	private Date birthDay;
 	private String address;
 	private String phone;
+	List<Booking> bookings =  new ArrayList<Booking>();
 
 	public Client() {
 		super();
@@ -74,4 +77,11 @@ public class Client implements Serializable {
 		this.phone = phone;
 	}
 
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
 }

@@ -108,7 +108,7 @@ public class RoomController {
 
     @RequestMapping(value = "/edit_room", method = RequestMethod.GET)
     public ModelAndView editEmployee(Model model, @RequestParam int id) {
-        RoomBean roomBean = roomService.getRoomById(id);
+        RoomBean roomBean = roomService.getRoomBeanById(id);
         List<HotelBean> listHotelsBean = hotelService.findAllHotels();
         ModelAndView view = new ModelAndView();
         if(roomBean == null) {

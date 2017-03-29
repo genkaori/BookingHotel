@@ -2,13 +2,13 @@ package vn.framgia.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
-import vn.framgia.bean.HotelBean;
 import vn.framgia.bean.RoomBean;
 import vn.framgia.model.Hotel;
 import vn.framgia.model.Room;
 import vn.framgia.service.IRoomService;
 import vn.framgia.util.Helpers;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,7 +66,7 @@ public class RoomServiceImpl extends BaseserviceImpl implements IRoomService {
     }
 
     @Override
-    public RoomBean getRoomById(int id) {
+    public RoomBean getRoomBeanById(int id) {
         try {
             Room room = roomDAO.findById(id);
             RoomBean roomBean = new RoomBean();
@@ -107,6 +107,37 @@ public class RoomServiceImpl extends BaseserviceImpl implements IRoomService {
             return roomDAO.getRoomByRoomName(roomName);
         } catch (Exception e) {
             logger.error("Exception in function getRoomByRoomName: ", e);
+        }
+        return null;
+    }
+
+    public List<RoomBean> searchRoomCondition(Date startDate, Date endDate, Integer size) {
+        try {
+            List<Integer> listRooms = roomDAO.searchRoomCondition(startDate, endDate, size);
+            List<RoomBean> listRoomsBean = new ArrayList<RoomBean>();
+            for(int i = 0; i<listRooms.size(); ++i) {
+                RoomBean roomBean = new RoomBean();
+                roomBean = getRoomBeanById(Integer.parseInt(listRooms.get(i)+""));
+                roomBean.setStart(Helpers.convertDatetoString(startDate));
+                roomBean.setEnd(Helpers.convertDatetoString(endDate));
+                listRoomsBean.add(roomBean);
+            }
+            return listRoomsBean;
+        } catch (Exception e) {
+            logger.error("Exception in function searchRoomCondition :", e);
+        }
+        return null;
+    }
+
+    @Override
+    public Room getRoomById(int id) {
+        try {
+            Room room = roomDAO.findById(id);
+            Hotel hotel = hotelDAO.getHotelById(room.getHotel().getId());
+            room.setHotel(hotel);;
+            return room;
+        } catch (Exception e) {
+            logger.debug("Exception in function getRoomBeanById: ", e);
         }
         return null;
     }

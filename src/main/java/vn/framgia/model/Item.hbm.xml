@@ -21,9 +21,10 @@
             <column name="description" length="200"/>
         </property>
 
-        <set name="bookings" table="tblUsedItem" inverse="true">
-            <key column="serviceId"/>
-            <many-to-many column="bookingId" class="vn.framgia.model.Booking" />
-        </set>
+        <list name="bookings" inverse="true" cascade="all" table="tblUsedItem" lazy="true" fetch="select">
+            <key column="itemId"/>
+            <index column="idx"/>
+            <many-to-many column="bookingId" class="vn.framgia.model.Booking"/>
+        </list>
     </class>
 </hibernate-mapping>

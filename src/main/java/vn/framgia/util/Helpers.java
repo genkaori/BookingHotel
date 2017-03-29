@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -373,24 +374,24 @@ public final class Helpers {
     
     public static String convertDatetoString(Date date){
     	try{
-    		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     		return dateFormat.format(date);
     		
     	}catch(Exception e){
     		return "";
     	}
     }
-    
-    public static String convertDateTimetoString(Date date){
-    	try{
-    		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    		return dateFormat.format(date);
-    		
-    	}catch(Exception e){
-    		return "";
-    	}
+
+    public static String convertDateTimetoString(Date date) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            return dateFormat.format(date);
+
+        } catch (Exception e) {
+            return "";
+        }
     }
-    
+
 	public static Integer getIdUser() {
 		CustomUserDetail userDetail = null;
 		try {
@@ -404,5 +405,19 @@ public final class Helpers {
 		}
 		return Integer.valueOf(userDetail.getUserId());
 	}
+
+    public static Date convertStringtoDate(String strDate) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            return sdf.parse(strDate);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static long getDayBetweenTwoDates(Date startDate, Date endDate) {
+        Long diff = endDate.getTime() - startDate.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
 	
 }

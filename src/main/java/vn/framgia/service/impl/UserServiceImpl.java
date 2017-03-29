@@ -164,5 +164,4 @@ public class UserServiceImpl extends BaseserviceImpl implements IUserService {
 		}
 		return null;
 	}
-
 }

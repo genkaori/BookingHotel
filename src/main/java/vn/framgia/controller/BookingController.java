@@ -12,18 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import vn.framgia.bean.*;
+import vn.framgia.service.*;
+import java.util.*;
 import vn.framgia.bean.ShowBookingBean;
 import vn.framgia.service.IBookingService;
 import vn.framgia.util.Helpers;
 
 @Controller
 public class BookingController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
-	@Autowired
-	private IBookingService bookingService; 
-	
+
+    private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
+    @Autowired
+    private IBookingService bookingService;
+
+    @Autowired
+    private IClientService clientService;
+
+    @Autowired
+    private IRoomService roomService;
+
+    @Autowired
+    private IItemService itemService;
+
 	@RequestMapping("/showbooking")
 	public ModelAndView show(){
 		logger.info("------show list booking by client");
@@ -44,4 +57,99 @@ public class BookingController {
 		model.put("listbooks", lstBookingBean);
 		return new ModelAndView("showbooking", model);
 	}
+
+    @RequestMapping(value = "/viewBooking", method = RequestMethod.GET)
+    public ModelAndView viewBooking(Model model) {
+        try {
+            ModelAndView view = new ModelAndView();
+            ConditionBookingBean conditionBookingBean = new ConditionBookingBean();
+            model.addAttribute("conditionBookingBeanForm", conditionBookingBean);
+            List<RoomBean> listRoomsBean = roomService.findAllRooms();
+            view.addObject("listRoomsBean", listRoomsBean);
+            view.setViewName("viewBooking");
+            return view;
+        } catch (Exception e) {
+            logger.error("Exception in function searchRoomCondition in BookingController : ", e);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/searchRoomCondition", method = RequestMethod.POST)
+    public ModelAndView searchRoomCondition(
+        @ModelAttribute("conditionBookingBeanForm") ConditionBookingBean conditionBookingBean) {
+        ModelAndView view = new ModelAndView();
+        try {
+
+            Integer size = conditionBookingBean.getSize();
+            Date start = Helpers.convertStringtoDate(conditionBookingBean.getStartDate());
+            Date end = Helpers.convertStringtoDate(conditionBookingBean.getEndDate());
+            List<RoomBean> listRoomsBean = roomService.searchRoomCondition(start, end, size);
+            if(listRoomsBean == null) {
+                view.addObject("err_empty", "Can not find results by condition");
+                listRoomsBean = roomService.findAllRooms();
+                view.addObject("listRoomsBean", listRoomsBean);
+                view.setViewName("viewBooking");
+                return view;
+            }
+            conditionBookingBean.setStartDate(conditionBookingBean.getStartDate());
+            conditionBookingBean.setEndDate(conditionBookingBean.getEndDate());
+            conditionBookingBean.setSize(conditionBookingBean.getSize());
+            view.addObject("conditionBookingBeanForm", conditionBookingBean);
+            view.addObject("listRoomsBean", listRoomsBean);
+            view.setViewName("viewBooking");
+            return view;
+        } catch (Exception e) {
+            logger.error("Exception in function searchRoomCondition in BookingController : ", e);
+        }
+        return view;
+    }
+
+    @RequestMapping(value = "/booking", method = RequestMethod.POST)
+    public ModelAndView bookingInfo(Model model, @ModelAttribute("roomBeanForm") RoomBean roomBeanForm) {
+        ModelAndView view = new ModelAndView();
+        try {
+            Integer id = roomBeanForm.getId();
+            RoomBean roomBean = roomService.getRoomBeanById(id);
+            roomBean.setStart(roomBeanForm.getStart());
+            roomBean.setEnd(roomBeanForm.getEnd());
+            model.addAttribute("roomBeanForm", roomBean);
+            ClientBean clientBean = new ClientBean();
+            model.addAttribute("clientBeanForm", clientBean);
+            List<ItemBean> listItemsBean = itemService.getAllItems();
+            model.addAttribute("listItemsBeanForm", listItemsBean);
+            BookingBean bookingBean = new BookingBean();
+            model.addAttribute("bookingBeanForm", bookingBean);
+            view.setViewName("booking");
+            return view;
+        } catch (Exception e) {
+            logger.error("Exception in function searchRoomCondition in BookingController : ", e);
+        }
+        return view;
+    }
+
+    @RequestMapping(value = "/bookingAction", method = RequestMethod.POST)
+    public ModelAndView bookingAction(@ModelAttribute("clientBeanForm") ClientBean clientBean,
+          @ModelAttribute("roomBeanForm") RoomBean roomBean,
+          @ModelAttribute("bookingBeanForm") BookingBean bookingBean) {
+        try {
+            ModelAndView view = new ModelAndView();
+            Integer clientId = clientService.addClient(clientBean);
+            if(clientId == null) {
+                view.addObject("err_addClient", "Add client, the error occurred!");
+                view.setViewName("viewBooking");
+                return view;
+            }
+            boolean check = bookingService.addBooking(bookingBean, clientBean, roomBean);
+            if (!check) {
+                List<RoomBean> listRoomsBean = roomService.findAllRooms();
+                view.addObject("listRoomsBean", listRoomsBean);
+                view.setViewName("viewBooking");
+                view.addObject("err_addBooking", "Add booking, the error occurred!");
+                return view;
+            }
+        } catch (Exception e) {
+            logger.error("Exception at function bookingAction in BookingController : ", e);
+        }
+        return new ModelAndView("redirect:viewBooking");
+    }
 }

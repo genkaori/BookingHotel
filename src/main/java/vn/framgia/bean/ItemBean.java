@@ -1,6 +1,9 @@
 package vn.framgia.bean;
 
 import java.io.Serializable;
+import vn.framgia.model.Booking;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by FRAMGIA\duong.van.tien on 08/03/2017.
@@ -12,6 +15,7 @@ public class ItemBean implements Serializable {
     private float price;
     private String description;
 
+    private List bookings = new ArrayList();
     public ItemBean() {}
 
     public int getId() {
@@ -44,5 +48,17 @@ public class ItemBean implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
+
+    public List getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List bookings) {
+        this.bookings = bookings;
     }
 }
