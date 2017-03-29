@@ -20,7 +20,7 @@ import vn.framgia.util.Helpers;
 @Controller
 public class BookingController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 	@Autowired
 	private IBookingService bookingService; 
 	

@@ -14,7 +14,7 @@ public class UserServiceDAOImpl extends GenericDAO<UsedItem, Integer> implements
 	@Override
 	public List<UsedItem> findServiceByBookingId(int bookingId) {
 		Criteria criteria = getSession().createCriteria(UsedItem.class);
-		criteria.add(Restrictions.eq("bookingId.id", bookingId));
+		criteria.add(Restrictions.eq("booking.id", bookingId));
 		return criteria.list();
 	}
 

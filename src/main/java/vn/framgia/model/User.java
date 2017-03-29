@@ -17,7 +17,7 @@ public class User implements Serializable{
     private String role;
 
     public User() {
-
+    	super();
     }
 
     public User(Integer id, String username, String password, String fullname,
@@ -31,8 +31,12 @@ public class User implements Serializable{
         this.phone = phone;
         this.role = role;
     }
+    
+    public User(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

@@ -381,11 +381,28 @@ public final class Helpers {
     	}
     }
     
-    public static int getIdUser(){
-    	CustomUserDetail userDetail = (CustomUserDetail)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	if(userDetail == null){
-    		return 0;
+    public static String convertDateTimetoString(Date date){
+    	try{
+    		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    		return dateFormat.format(date);
+    		
+    	}catch(Exception e){
+    		return "";
     	}
-    	return Integer.valueOf(userDetail.getUserId());
     }
+    
+	public static Integer getIdUser() {
+		CustomUserDetail userDetail = null;
+		try {
+			userDetail = (CustomUserDetail) SecurityContextHolder.getContext()
+					.getAuthentication().getPrincipal();
+			if (userDetail == null) {
+				return 0;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+		return Integer.valueOf(userDetail.getUserId());
+	}
+	
 }

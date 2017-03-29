@@ -14,7 +14,7 @@ public class BillDAOImpl extends GenericDAO<Bill, Integer> implements IBillDAO {
 	@Override
 	public List<Bill> findBillByBooKing(String bookingId) {
 		Criteria criterion = getSession().createCriteria(Bill.class);
-		criterion.add(Restrictions.eq("bookingId.id", Integer.valueOf(bookingId)));
+		criterion.add(Restrictions.eq("booking.id", Integer.valueOf(bookingId)));
 		return criterion.list();
 	}
 
