@@ -53,4 +53,10 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
+	
+		<bean id="FileUploadDAO" class="vn.framgia.dao.impl.FileUploadDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 </beans>

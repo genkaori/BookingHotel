@@ -8,6 +8,8 @@ import vn.framgia.dao.IUserDAO;
 import vn.framgia.dao.IItemDAO;
 import vn.framgia.dao.IUserServiceDAO;
 import vn.framgia.dao.IClientDAO;
+import vn.framgia.dao.IFileUploadDAO;
+
 import java.io.Serializable;
 
 /**
@@ -24,6 +26,7 @@ public class BaseserviceImpl implements Serializable {
     protected IBillDAO billDAO;
     protected IUserServiceDAO userServiceDAO;
     protected IClientDAO clientDAO;
+    protected IFileUploadDAO fileUploadDAO;
 
     public IUserDAO getUserDAO() {
         return userDAO;
@@ -88,4 +91,13 @@ public class BaseserviceImpl implements Serializable {
     public void setClientDAO(IClientDAO clientDAO) {
         this.clientDAO = clientDAO;
     }
+
+	public IFileUploadDAO getFileUploadDAO() {
+		return fileUploadDAO;
+	}
+
+	public void setFileUploadDAO(IFileUploadDAO fileUploadDAO) {
+		this.fileUploadDAO = fileUploadDAO;
+	}
+    
 }
