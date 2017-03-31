@@ -21,6 +21,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
 
+	<!-- room -->
+	<definition name="showRoom" extends="base.definition">
+		<put-attribute name="title" value="Home"/>
+		<put-attribute name="body" value="/WEB-INF/views/room/room.jsp"/>
+	</definition>
+
     <!-- show room -->
     <definition name="rooms" extends="base.definition">
         <put-attribute name="title" value="Home"/>
@@ -78,7 +84,12 @@
 		<put-attribute name="title" value="Show Booking" />
 		<put-attribute name="body" value="/WEB-INF/views/booking/user_showbooking.jsp" />
 	</definition>
-	
+
+	<definition name="searchRoom" extends="base.definition">
+		<put-attribute name="title" value="Show Booking" />
+		<put-attribute name="body" value="/WEB-INF/views/booking/searchRoom.jsp" />
+	</definition>
+
 	<definition name="listUser" extends="base.definition">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="body" value="/WEB-INF/views/user/listUser.jsp" />
