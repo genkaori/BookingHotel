@@ -149,4 +149,19 @@ public class RoomController {
         }
         return new ModelAndView("redirect:rooms");
     }
+
+    @RequestMapping(value = "/room", method = RequestMethod.GET)
+    public ModelAndView showRoom(Model model, @RequestParam int id) {
+        RoomBean roomBean = roomService.getRoomBeanById(id);
+        ModelAndView view = new ModelAndView();
+        if(roomBean == null) {
+            model.addAttribute("err_showRoom", "Action show room, the error occurred!");
+            List<RoomBean> listRoomsBean = roomService.findAllRooms();
+            view.addObject("listRoomsBean", listRoomsBean);
+            return new ModelAndView("redirect:rooms");
+        }
+        model.addAttribute("roomBeanForm", roomBean);
+        view.setViewName("showRoom");
+        return view;
+    }
 }

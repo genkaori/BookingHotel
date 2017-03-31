@@ -57,13 +57,15 @@ public class BookingController {
 	}
 
     @RequestMapping(value = "/viewBooking", method = RequestMethod.GET)
-    public ModelAndView viewBooking(Model model) {
+    public ModelAndView viewBooking(Model model, Integer offset, Integer maxResults) {
         try {
             ModelAndView view = new ModelAndView();
             ConditionBookingBean conditionBookingBean = new ConditionBookingBean();
             model.addAttribute("conditionBookingBeanForm", conditionBookingBean);
-            List<RoomBean> listRoomsBean = roomService.findAllRooms();
+            List<RoomBean> listRoomsBean = bookingService.listRooms(offset, maxResults);
             view.addObject("listRoomsBean", listRoomsBean);
+            model.addAttribute("count", bookingService.countRoom());
+            model.addAttribute("offset", offset);
             view.setViewName("viewBooking");
             return view;
         } catch (Exception e) {
@@ -94,7 +96,7 @@ public class BookingController {
             conditionBookingBean.setSize(conditionBookingBean.getSize());
             view.addObject("conditionBookingBeanForm", conditionBookingBean);
             view.addObject("listRoomsBean", listRoomsBean);
-            view.setViewName("viewBooking");
+            view.setViewName("searchRoom");
             return view;
         } catch (Exception e) {
             logger.error("Exception in function searchRoomCondition in BookingController : ", e);
@@ -103,7 +105,8 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/booking", method = RequestMethod.POST)
-    public ModelAndView bookingInfo(Model model, @ModelAttribute("roomBeanForm") RoomBean roomBeanForm) {
+    public ModelAndView bookingInfo(Model model, @ModelAttribute("roomBeanForm") RoomBean roomBeanForm,
+            Integer offset, Integer maxResults) {
         ModelAndView view = new ModelAndView();
         try {
             Integer id = roomBeanForm.getId();
@@ -132,6 +135,7 @@ public class BookingController {
         try {
             ModelAndView view = new ModelAndView();
             Integer clientId = clientService.addClient(clientBean);
+            clientBean.setId(clientId);
             if(clientId == null) {
                 view.addObject("err_addClient", "Add client, the error occurred!");
                 List<RoomBean> listRoomsBean = roomService.findAllRooms();

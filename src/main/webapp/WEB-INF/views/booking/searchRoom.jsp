@@ -1,13 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: FRAMGIA\duong.van.tien
-  Date: 07/03/2017
-  Time: 13:53
+  Date: 31/03/2017
+  Time: 09:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css"/>
 <style>
@@ -85,8 +84,8 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <form:input class="form-control" path="startDate" id="startDate" name="startDate"
-                                               placeholder="yyyy/mm/dd" type="text"
-                                               value="${conditionBookingBeanForm.startDate}"/>
+                                                    placeholder="yyyy/mm/dd" type="text"
+                                                    value="${conditionBookingBeanForm.startDate}"/>
                                     </div>
                                 </div>
                                 <label class="control-label col-sm-12 requiredField">
@@ -124,8 +123,8 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <form:input class="form-control" path="endDate" id="endDate" name="endDate"
-                                               placeholder="yyyy/mm/dd" type="text"
-                                               value="${conditionBookingBeanForm.endDate}"/>
+                                                    placeholder="yyyy/mm/dd" type="text"
+                                                    value="${conditionBookingBeanForm.endDate}"/>
                                     </div>
                                 </div>
                             </div>
@@ -174,25 +173,14 @@
                                 <div class="row">
                                     <div class="col-sm-3 col-xs-3 goleft"></div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <a href="${pageContext.request.contextPath}/room?id=${room.id}"
-                                           class="btn btn-theme btn-sm">Detail</a>
+                                        <a class="btnSubmit btn btn-theme"> Booking </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form:form>
                 </c:forEach>
-
             </c:if>
-        </div>
-        <div class="col-md-12 row-mt">
-            <div class="col-sm-3">
-                <tag:paginate max="15" offset="${offset}" count="${count}"
-                              uri="/viewBooking" next="&raquo;" previous="&laquo;" />
-            </div>
-            <div class="col-sm-6"></div>
-            <div class="col-sm-3">
-            </div>
         </div>
     </div>
 </div>
@@ -238,6 +226,23 @@
         }
         return false;
     }
+
+        $('.btnSubmit').on("click", function (e) {
+            e.preventDefault();
+            var startDateVal = $("#startDate").val();
+            var endDateVal = $("#endDate").val();
+            var check = true;
+
+            if(checkEndDate(endDateVal)) {
+                check = false;
+            }
+            if(checkStartDate(startDateVal)) {
+                check = false;
+            }
+            if (check) {
+                $("#formRoom").submit();
+            }
+        });
 
     $('#btnSearch').on("click", function (e) {
         e.preventDefault();
