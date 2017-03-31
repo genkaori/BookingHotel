@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import vn.framgia.bean.BillBeanClient;
 import vn.framgia.security.CustomUserDetail;
 
 /**
@@ -419,5 +420,25 @@ public final class Helpers {
         Long diff = endDate.getTime() - startDate.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
+	
+	public static int getComponentDate(Date date, String component) {
+		int result = 0;
+		try {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			if (BillBeanClient.DAY == component) {
+				result = calendar.get(Calendar.DAY_OF_MONTH);
+			}
+			if (BillBeanClient.MONTH == component) {
+				result = calendar.get(Calendar.MONTH);
+			}
+			if (BillBeanClient.YEAR == component) {
+				result = calendar.get(Calendar.YEAR);
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+		return result;
+	}
 	
 }
